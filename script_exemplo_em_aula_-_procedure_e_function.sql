@@ -50,7 +50,7 @@ BEGIN
   return result;
 END;
 
-SELECT lista_tabelas('CHINOOK') FROM dual;
+ 
 
     SELECT * FROM ALL_TABLES
     where owner = 'CHINOOK';
