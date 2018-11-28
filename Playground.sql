@@ -39,4 +39,41 @@ SELECT * FROM all_ind_columns  WHERE INDEX_OWNER='CHINOOK';
             FROM all_ind_columns 
                 WHERE INDEX_OWNER='CHINOOK' AND TABLE_NAME='ARTIST';
 
+BEGIN
+    DECLARE nome VARCHAR2(20);
+    nome:='ARTIST';
+        
+    SELECT * FROM ALL_IND_COLUMNS WHERE TABLE_NAME='artist';
 
+END;
+
+SELECT artist.name, album.title FROM album JOIN artist ON album.artistid=artist.artistid  
+
+SELECT constraint_name,table_name from ALL_CONSTRAINTS where owner = 'CHINOOK' AND constraint_type = 'R';
+
+SELECT constraint_name,table_name,column_name from ALL_CONS_COLUMNS where owner = 'CHINOOK' ;
+
+SELECT all_cons_columns.constraint_name ,all_cons_columns.table_name,all_cons_columns.column_name 
+    FROM all_cons_columns,all_constraints INNER JOIN ALL_CONSTRAINTS ON all_constraints.constraint_name = all_cons_columns.constraint_name
+    WHERE ALL_CONSTRAINTS.constrait_type ='R';
+
+
+
+BEGIN
+    DECLARE
+        CURSOR c_const IS
+            SELECT constraint_name,table_name from ALL_CONSTRAINTS where owner = 'CHINOOK' AND constraint_type = 'R';
+            
+        CURSOR c_all_col IS
+            SELECT constraint_name,table_name,column_name from ALL_CONS_COLUMNS where owner = 'CHINOOK';
+    BEGIN 
+        open c_const;
+        open c_all_col;
+        SELECT * FROM c_all_col JOIN c_const ON c_all_col.constraint_name = c_const.constraint_name;
+        close c_const;
+        close c_all_col;
+    END;
+END;
+    
+    
+    
