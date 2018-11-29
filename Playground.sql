@@ -54,7 +54,7 @@ SELECT constraint_name,table_name from ALL_CONSTRAINTS where owner = 'CHINOOK' A
 SELECT constraint_name,table_name,column_name from ALL_CONS_COLUMNS where owner = 'CHINOOK' ;
 
 SELECT all_cons_columns.constraint_name ,all_cons_columns.table_name,all_cons_columns.column_name 
-    FROM all_cons_columns,all_constraints INNER JOIN ALL_CONSTRAINTS ON all_constraints.constraint_name = all_cons_columns.constraint_name
+    FROM all_cons_columns all_c_c,all_constraints all_c INNER JOIN ALL_CONSTRAINTS ON all_constraints.constraint_name = all_cons_columns.constraint_name
     WHERE ALL_CONSTRAINTS.constrait_type ='R';
 
 
@@ -69,11 +69,27 @@ BEGIN
     BEGIN 
         open c_const;
         open c_all_col;
-        SELECT * FROM c_all_col JOIN c_const ON c_all_col.constraint_name = c_const.constraint_name;
+        SELECT * FROM ALL_CONSTRAINTS JOIN c_const ON c_all_col.constraint_name = c_const.constraint_name;
         close c_const;
         close c_all_col;
     END;
 END;
     
-    
-    
+SELECT * from invoiceline;
+
+select * from invoice;
+
+select * from TRACK;
+select * from CUSTOMER;
+
+SELECT * FROM invoice JOIN invoiceline ON invoice.invoiceid = invoiceline.invoiceid;
+
+
+SELECT * from invoice where TOTAL >= 10;
+
+SELECT * from track 
+    JOIN album ON track.albumid = album.albumid 
+    JOIN artist ON artist.artistid = album.artistid 
+    WHERE artist.name = 'Queen';
+
+IN

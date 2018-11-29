@@ -17,6 +17,8 @@ end;
 
 execute deleteinvoice(180);
 
+rollback;
+
 create or replace function invoicelinecount(Id int) return int is
   vCount int;
 begin
