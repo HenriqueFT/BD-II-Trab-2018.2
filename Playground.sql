@@ -93,3 +93,10 @@ SELECT * from track
     WHERE artist.name = 'Queen';
 
 IN
+
+
+--Pra ver o que um usuario tem
+SELECT * FROM USER_SYS_PRIVS; 
+SELECT * FROM USER_TAB_PRIVS;
+SELECT * FROM USER_ROLE_PRIVS;
+
